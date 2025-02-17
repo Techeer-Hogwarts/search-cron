@@ -31,7 +31,7 @@ func NewIndexHandler(service services.IndexService) *IndexHandler {
 // @Router /search [get]
 func (h *IndexHandler) CreateIndex(c *gin.Context) {
 	// Create index in meilisearch
-	var post *models.BaicIndex
+	var post *models.BaiscIndex
 	err := h.service.CreateIndex(post)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})

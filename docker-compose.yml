@@ -9,6 +9,82 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    networks:
+      - search-network
   
-volumes: 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=test@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=test
+    networks:
+      - search-network
+  
+  search-conatiner:
+    image: suhach0523/techeerism-search:dev
+    container_name: search-container
+    networks:
+      - search-network
+    env_file:
+      - .env
+    environment:
+      - MEILISEARCH_ADDR=http://meilisearch:7700
+      - MEILISEARCH_KEY=${MEILISEARCH_API_KEY}
+      - GIN_MODE=release
+      - SWAGGER_USERNAME=${SWAGGER_USERNAME}
+      - SWAGGER_PASSWORD=${SWAGGER_PASSWORD}
+    ports:
+      - "8080:8080"
+  
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: meilisearch
+    networks:
+      - search-network
+    ports:
+      - "7700:7700"
+    environment:
+      - MEILI_MASTER_KEY=${MEILISEARCH_API_KEY}
+      - MEILI_EXPERIMENTAL_ENABLE_METRICS=true
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_ENV=production
+    env_file:
+      - .env
+    volumes:
+      - meilisearch-data:/meili_data/data.ms
+    restart: unless-stopped
+  
+  prometheus:
+    image: prom/prometheus:v2.45.6
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    env_file:
+      - .env
+    environment:
+      - MEILISEARCH_API_KEY=${MEILISEARCH_API_KEY}
+    networks:
+      - search-network
+  
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - search-network
+
+networks:
+  search-network:
+    driver: bridge
+
+volumes:
+  meilisearch-data:
   postgres-data:

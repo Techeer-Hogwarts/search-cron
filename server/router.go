@@ -39,10 +39,14 @@ func setupRouter(handler *handlers.Handler) *gin.Engine {
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.BasePath = "/api/v2"
 	{
-		// User routes
-		userGroup := apiGroup.Group("/index")
+		indexGroup := apiGroup.Group("/index")
 		{
-			userGroup.POST("", handler.IndexHandler.CreateIndex)
+			indexGroup.POST("", handler.IndexHandler.CreateIndex)
+		}
+		syncGroup := apiGroup.Group("/sync")
+		{
+			syncGroup.POST("/all", handler.IndexHandler.CreateIndex)
+			syncGroup.POST("/new", handler.IndexHandler.CreateIndex)
 		}
 	}
 	swagger := router.Group("/swagger")

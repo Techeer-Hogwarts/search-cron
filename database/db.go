@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/Techeer-Hogwarts/search-cron/config"
+	"github.com/meilisearch/meilisearch-go"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -24,6 +25,16 @@ func SetupDatabase() *gorm.DB {
 	if err != nil {
 		log.Fatal("Failed to connect to database: ", err)
 	}
-
+	log.Println("Database connected")
 	return db
+}
+
+// Initialize Meilisearch client
+func InitMeilisearch() *meilisearch.ServiceManager {
+	clientAddr := config.GetEnvVarAsString("MEILISEARCH_ADDR", "http://localhost:7700")
+	clientAPIKey := config.GetEnvVarAsString("MEILISEARCH_API_KEY", "masterKey")
+	client := meilisearch.New(clientAddr, meilisearch.WithAPIKey(clientAPIKey))
+	MeiliClient := &client
+	log.Println("Meilisearch client initialized")
+	return MeiliClient
 }

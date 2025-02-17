@@ -11,7 +11,8 @@ import (
 
 func Start(port string) {
 	db := database.SetupDatabase()
-	repo := repositories.NewRepository(db)
+	meiliClient := database.InitMeilisearch()
+	repo := repositories.NewRepository(db, meiliClient)
 	service := services.NewService(repo)
 	handler := handlers.NewHandler(service)
 

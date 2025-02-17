@@ -6,7 +6,7 @@ import (
 )
 
 type IndexService interface {
-	CreateIndex(post *models.BaicIndex) error
+	CreateIndex(post *models.BaiscIndex) error
 }
 
 type indexService struct {
@@ -17,6 +17,7 @@ func NewIndexService(repo repositories.IndexRepository) IndexService {
 	return &indexService{repo}
 }
 
-func (s *indexService) CreateIndex(post *models.BaicIndex) error {
-	return s.repo.CreateIndex(post)
+func (s *indexService) CreateIndex(post *models.BaiscIndex) error {
+	var temp models.UserIndex
+	return s.repo.CreateUserIndex(&temp)
 }
