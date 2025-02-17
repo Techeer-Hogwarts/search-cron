@@ -37,16 +37,29 @@ func setupRouter(handler *handlers.Handler) *gin.Engine {
 	docs.SwaggerInfo.Title = "Techeerzip Search API"
 	docs.SwaggerInfo.Description = "Search Engine API"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.BasePath = "/api/v2"
+	docs.SwaggerInfo.BasePath = "/api/v1"
 	{
 		indexGroup := apiGroup.Group("/index")
 		{
-			indexGroup.POST("", handler.IndexHandler.CreateIndex)
+			indexGroup.POST("/user", handler.IndexHandler.CreateUserIndexHandler)
+			indexGroup.POST("/project", handler.IndexHandler.CreateProjectIndexHandler)
+			indexGroup.POST("/study", handler.IndexHandler.CreateStudyIndexHandler)
+			indexGroup.POST("/blog", handler.IndexHandler.CreateBlogIndexHandler)
+			indexGroup.POST("/resume", handler.IndexHandler.CreateResumeIndexHandler)
+			indexGroup.POST("/session", handler.IndexHandler.CreateSessionIndexHandler)
+			indexGroup.POST("/event", handler.IndexHandler.CreateEventIndexHandler)
 		}
 		syncGroup := apiGroup.Group("/sync")
 		{
-			syncGroup.POST("/all", handler.IndexHandler.CreateIndex)
-			syncGroup.POST("/new", handler.IndexHandler.CreateIndex)
+			syncGroup.POST("/all", handler.IndexHandler.SyncAllIndexHandler)
+			syncGroup.POST("/new", handler.IndexHandler.SyncNewIndexHandler)
+		}
+		deleteGroup := apiGroup.Group("/delete")
+		{
+			deleteGroup.DELETE("/index", handler.IndexHandler.DeleteIndexHandler)
+			deleteGroup.DELETE("/index/all", handler.IndexHandler.DeleteAllIndexHandler)
+			deleteGroup.DELETE("/document", handler.IndexHandler.DeleteDocumentHandler)
+			deleteGroup.DELETE("/document/all", handler.IndexHandler.DeleteAllDocumentHandler)
 		}
 	}
 	swagger := router.Group("/swagger")

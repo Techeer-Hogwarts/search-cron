@@ -26,23 +26,24 @@ type ProjectIndex struct {
 }
 
 type StudyIndex struct {
-	ID             string   `json:"id" form:"id" example:"1"`
-	Name           string   `json:"name" form:"name" example:"프로젝트 이름"`
-	Title          string   `json:"title" form:"title" example:"프로젝트 제목"`
-	ProjectExplain string   `json:"projectExplain" form:"projectExplain" example:"프로젝트 설명"`
-	ResultImages   []string `json:"resultImages" form:"resultImages" example:"https://example.com/result.jpg"`
-	TeamStacks     []string `json:"teamStacks" form:"teamStacks" example:"Go"`
+	ID           string   `json:"id" form:"id" example:"1"`
+	Name         string   `json:"name" form:"name" example:"스터디 이름"`
+	Title        string   `json:"title" form:"title" example:"스터디 제목"`
+	StudyExplain string   `json:"studyExplain" form:"studyExplain" example:"스터디 설명"`
+	ResultImages []string `json:"resultImages" form:"resultImages" example:"https://example.com/result.jpg"`
+	TeamStacks   []string `json:"teamStacks" form:"teamStacks" example:"Go"`
 }
 
 type BlogIndex struct {
-	ID               string `json:"id" form:"id" example:"1"`
-	Title            string `json:"title" form:"title" example:"블로그 제목"`
-	URL              string `json:"url" form:"url" example:"https://example.com/blog"`
-	Date             string `json:"date" form:"date" example:"2021-01-01"`
-	UserID           string `json:"userID" form:"userID" example:"1"`
-	UserName         string `json:"userName" form:"userName" example:"윤정은"`
-	UserProfileImage string `json:"userProfileImage" form:"userProfileImage" example:"https://example.com/profile.jpg"`
-	Stack            string `json:"stack" form:"stack" example:"Go"`
+	ID               string   `json:"id" form:"id" example:"1"`
+	Title            string   `json:"title" form:"title" example:"블로그 제목"`
+	URL              string   `json:"url" form:"url" example:"https://example.com/blog"`
+	Date             string   `json:"date" form:"date" example:"2021-01-01"`
+	UserID           string   `json:"userID" form:"userID" example:"1"`
+	UserName         string   `json:"userName" form:"userName" example:"윤정은"`
+	UserProfileImage string   `json:"userProfileImage" form:"userProfileImage" example:"https://example.com/profile.jpg"`
+	Thumbnail        string   `json:"thumbnail" form:"thumbnail" example:"https://example.com/thumbnail.jpg"`
+	Stack            []string `json:"stack" form:"stack" example:"Go"`
 }
 
 type ResumeIndex struct {
@@ -53,7 +54,6 @@ type ResumeIndex struct {
 	UserID           string `json:"userID" form:"userID" example:"1"`
 	UserName         string `json:"userName" form:"userName" example:"윤정은"`
 	UserProfileImage string `json:"userProfileImage" form:"userProfileImage" example:"https://example.com/profile.jpg"`
-	Stack            string `json:"stack" form:"stack" example:"Go"`
 }
 
 type SessionIndex struct {
