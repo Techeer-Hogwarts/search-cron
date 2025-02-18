@@ -316,14 +316,14 @@ func (h *IndexHandler) DeleteAllIndexHandler(c *gin.Context) {
 // @Failure 500 {object} map[string]interface{}
 // @Router /delete/document/all [delete]
 func (h *IndexHandler) DeleteAllDocumentHandler(c *gin.Context) {
-	var eventIndex models.BaiscIndex
+	var indexReq models.BaiscIndex
 
-	if err := c.ShouldBindQuery(&eventIndex); err != nil {
+	if err := c.ShouldBindQuery(&indexReq); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	info, err := h.service.DeleteAllDocuments(eventIndex.Index)
+	info, err := h.service.DeleteAllDocuments(indexReq.Index)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
