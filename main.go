@@ -1,8 +1,12 @@
 package main
 
-import "log"
+import (
+	"github.com/Techeer-Hogwarts/search-cron/config"
+	"github.com/Techeer-Hogwarts/search-cron/server"
+)
 
+// 앱에서 가장 먼저 실행되는 함수
 func main() {
-	// Create a new instance of the app
-	log.Println("Starting the application...")
+	port := config.GetEnvVarAsString("PORT", "8081")
+	server.Start(port)
 }

@@ -1,0 +1,585 @@
+definitions:
+  models.BlogIndex:
+    properties:
+      date:
+        example: "2021-01-01"
+        type: string
+      id:
+        example: "1"
+        type: string
+      stack:
+        example:
+        - Go
+        items:
+          type: string
+        type: array
+      thumbnail:
+        example: https://example.com/thumbnail.jpg
+        type: string
+      title:
+        example: 블로그 제목
+        type: string
+      url:
+        example: https://example.com/blog
+        type: string
+      userID:
+        example: "1"
+        type: string
+      userName:
+        example: 윤정은
+        type: string
+      userProfileImage:
+        example: https://example.com/profile.jpg
+        type: string
+    type: object
+  models.EventIndex:
+    properties:
+      category:
+        example: 세션
+        type: string
+      id:
+        example: "1"
+        type: string
+      title:
+        example: 세션 제목
+        type: string
+    type: object
+  models.ProjectIndex:
+    properties:
+      id:
+        example: "1"
+        type: string
+      name:
+        example: 프로젝트 이름
+        type: string
+      projectExplain:
+        example: 프로젝트 설명
+        type: string
+      resultImages:
+        example:
+        - https://example.com/result.jpg
+        items:
+          type: string
+        type: array
+      teamStacks:
+        example:
+        - Go
+        items:
+          type: string
+        type: array
+      title:
+        example: 프로젝트 제목
+        type: string
+    type: object
+  models.ResumeIndex:
+    properties:
+      createdAt:
+        example: "2021-01-01"
+        type: string
+      id:
+        example: "1"
+        type: string
+      title:
+        example: 이력서 제목
+        type: string
+      url:
+        example: https://example.com/resume
+        type: string
+      userID:
+        example: "1"
+        type: string
+      userName:
+        example: 윤정은
+        type: string
+      userProfileImage:
+        example: https://example.com/profile.jpg
+        type: string
+    type: object
+  models.SessionIndex:
+    properties:
+      date:
+        example: "2021-01-01"
+        type: string
+      id:
+        example: "1"
+        type: string
+      likeCount:
+        example: 10
+        type: integer
+      presenter:
+        example: 윤정은
+        type: string
+      thumbnail:
+        example: https://example.com/thumbnail.jpg
+        type: string
+      title:
+        example: 세션 제목
+        type: string
+      viewCount:
+        example: 100
+        type: integer
+    type: object
+  models.StudyIndex:
+    properties:
+      id:
+        example: "1"
+        type: string
+      name:
+        example: 스터디 이름
+        type: string
+      resultImages:
+        example:
+        - https://example.com/result.jpg
+        items:
+          type: string
+        type: array
+      studyExplain:
+        example: 스터디 설명
+        type: string
+      teamStacks:
+        example:
+        - Go
+        items:
+          type: string
+        type: array
+      title:
+        example: 스터디 제목
+        type: string
+    type: object
+  models.UserIndex:
+    properties:
+      email:
+        example: test@gmail.com
+        type: string
+      grade:
+        example: "3"
+        type: string
+      id:
+        example: "1"
+        type: string
+      name:
+        example: 윤정은
+        type: string
+      profileImage:
+        example: https://example.com/profile.jpg
+        type: string
+      school:
+        example: 서울대학교
+        type: string
+      stack:
+        example:
+        - Go
+        items:
+          type: string
+        type: array
+      year:
+        example: 7
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /delete/document:
+    delete:
+      description: Delete intended document in Meilisearch
+      parameters:
+      - description: name of index
+        in: query
+        name: index
+        required: true
+        type: string
+      - description: id of document
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete document in index in meilisearch
+      tags:
+      - delete
+  /delete/document/all:
+    delete:
+      description: Delete all documents in an index in Meilisearch. Use at your own
+        risk
+      parameters:
+      - description: name of index
+        in: query
+        name: index
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete all document in meilisearch
+      tags:
+      - delete
+  /delete/index:
+    delete:
+      description: Delete intended index in Meilisearch
+      parameters:
+      - description: name of index
+        in: query
+        name: index
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete index in meilisearch
+      tags:
+      - delete
+  /delete/index/all:
+    delete:
+      description: Delete all index in Meilisearch. Use at your own risk
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete all index in meilisearch
+      tags:
+      - delete
+  /index/blog:
+    post:
+      consumes:
+      - application/json
+      description: Add Blog Index to Meilisearch
+      parameters:
+      - description: Blog Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /index/event:
+    post:
+      consumes:
+      - application/json
+      description: Add Event Index to Meilisearch
+      parameters:
+      - description: Event Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.EventIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /index/project:
+    post:
+      consumes:
+      - application/json
+      description: Add Project Index to Meilisearch
+      parameters:
+      - description: Project Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProjectIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /index/resume:
+    post:
+      consumes:
+      - application/json
+      description: Add Resume Index to Meilisearch
+      parameters:
+      - description: Resume Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.ResumeIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /index/session:
+    post:
+      consumes:
+      - application/json
+      description: Add Session Index to Meilisearch
+      parameters:
+      - description: Session Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.SessionIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /index/study:
+    post:
+      consumes:
+      - application/json
+      description: Add Study Index to Meilisearch
+      parameters:
+      - description: Study Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.StudyIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /index/user:
+    post:
+      consumes:
+      - application/json
+      description: Add User Index to Meilisearch
+      parameters:
+      - description: User Index
+        in: body
+        name: index
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserIndex'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
+  /sync/all:
+    post:
+      consumes:
+      - application/json
+      description: Sync all index with database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Sync all index in meilisearch
+      tags:
+      - sync
+  /sync/new:
+    post:
+      consumes:
+      - application/json
+      description: Sync new index with database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Sync new index in meilisearch
+      tags:
+      - sync
+swagger: "2.0"

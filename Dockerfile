@@ -23,7 +23,7 @@ FROM alpine:latest
 COPY --from=builder /app/search-cron .
 
 # 포트 오픈
-EXPOSE 8085
+EXPOSE 8081
 
 # 바이너리 실행
 CMD ["./search-cron"]
