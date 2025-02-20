@@ -708,7 +708,7 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string",
-                    "example": "프로젝트 제목"
+                    "example": "내부용. 무시하세요"
                 }
             }
         },
@@ -804,7 +804,7 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string",
-                    "example": "스터디 제목"
+                    "example": "내부용. 무시하세요"
                 }
             }
         },
