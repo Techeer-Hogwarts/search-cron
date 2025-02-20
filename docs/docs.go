@@ -802,15 +802,6 @@ const docTemplate = `{
                     "type": "string",
                     "example": "스터디 설명"
                 },
-                "teamStacks": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "Go"
-                    ]
-                },
                 "title": {
                     "type": "string",
                     "example": "스터디 제목"

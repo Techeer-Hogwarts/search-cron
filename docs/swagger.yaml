@@ -136,12 +136,6 @@ definitions:
       studyExplain:
         example: 스터디 설명
         type: string
-      teamStacks:
-        example:
-        - Go
-        items:
-          type: string
-        type: array
       title:
         example: 스터디 제목
         type: string
