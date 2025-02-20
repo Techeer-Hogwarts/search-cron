@@ -31,7 +31,6 @@ type StudyIndex struct {
 	Title        string   `json:"title" form:"title" example:"스터디 제목"`
 	StudyExplain string   `json:"studyExplain" form:"studyExplain" example:"스터디 설명"`
 	ResultImages []string `json:"resultImages" form:"resultImages" example:"https://example.com/result.jpg"`
-	TeamStacks   []string `json:"teamStacks" form:"teamStacks" example:"Go"`
 }
 
 type BlogIndex struct {
