@@ -708,7 +708,7 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string",
-                    "example": "프로젝트 제목"
+                    "example": "내부용. 무시하세요"
                 }
             }
         },
@@ -802,18 +802,9 @@ const docTemplate = `{
                     "type": "string",
                     "example": "스터디 설명"
                 },
-                "teamStacks": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "Go"
-                    ]
-                },
                 "title": {
                     "type": "string",
-                    "example": "스터디 제목"
+                    "example": "내부용. 무시하세요"
                 }
             }
         },

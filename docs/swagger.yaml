@@ -68,7 +68,7 @@ definitions:
           type: string
         type: array
       title:
-        example: 프로젝트 제목
+        example: 내부용. 무시하세요
         type: string
     type: object
   models.ResumeIndex:
@@ -136,14 +136,8 @@ definitions:
       studyExplain:
         example: 스터디 설명
         type: string
-      teamStacks:
-        example:
-        - Go
-        items:
-          type: string
-        type: array
       title:
-        example: 스터디 제목
+        example: 내부용. 무시하세요
         type: string
     type: object
   models.UserIndex:

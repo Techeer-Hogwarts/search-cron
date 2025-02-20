@@ -19,7 +19,7 @@ type UserIndex struct {
 type ProjectIndex struct {
 	ID             string   `json:"id" form:"id" example:"1"`
 	Name           string   `json:"name" form:"name" example:"프로젝트 이름"`
-	Title          string   `json:"title" form:"title" example:"프로젝트 제목"`
+	Title          string   `json:"title" form:"title" example:"내부용. 무시하세요"`
 	ProjectExplain string   `json:"projectExplain" form:"projectExplain" example:"프로젝트 설명"`
 	ResultImages   []string `json:"resultImages" form:"resultImages" example:"https://example.com/result.jpg"`
 	TeamStacks     []string `json:"teamStacks" form:"teamStacks" example:"Go"`
@@ -28,7 +28,7 @@ type ProjectIndex struct {
 type StudyIndex struct {
 	ID           string   `json:"id" form:"id" example:"1"`
 	Name         string   `json:"name" form:"name" example:"스터디 이름"`
-	Title        string   `json:"title" form:"title" example:"스터디 제목"`
+	Title        string   `json:"title" form:"title" example:"내부용. 무시하세요"`
 	StudyExplain string   `json:"studyExplain" form:"studyExplain" example:"스터디 설명"`
 	ResultImages []string `json:"resultImages" form:"resultImages" example:"https://example.com/result.jpg"`
 }
