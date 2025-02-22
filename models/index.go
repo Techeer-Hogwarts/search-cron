@@ -67,6 +67,7 @@ type SessionIndex struct {
 
 type EventIndex struct {
 	ID       string `json:"id" form:"id" example:"1"`
+	URl      string `json:"url" form:"url" example:"https://example.com/event"`
 	Category string `json:"category" form:"category" example:"세션"`
 	Title    string `json:"title" form:"title" example:"세션 제목"`
 }
