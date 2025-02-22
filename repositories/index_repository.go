@@ -798,7 +798,7 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 	if condition == "all" {
 		// Fetch all sessions
 		rows, err := db.Query(`
-            SELECT id, category, title
+            SELECT id, category, title, url
             FROM public."Session"
             WHERE "isDeleted" = false
         `)
@@ -810,14 +810,15 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 		var sessions []models.EventIndex
 		for rows.Next() {
 			var id int
-			var title, category string
-			err := rows.Scan(&id, &category, &title)
+			var title, category, url string
+			err := rows.Scan(&id, &category, &title, &url)
 			if err != nil {
 				return nil, err
 			}
 
 			session := models.EventIndex{
 				ID:       strconv.Itoa(id),
+				URl:      url,
 				Title:    title,
 				Category: category,
 			}
@@ -848,7 +849,7 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 
 		// Fetch new sessions created or updated after lastSyncedAt
 		rows, err := db.Query(`
-            SELECT id, category, title
+            SELECT id, category, title, url
             FROM public."Session"
             WHERE "isDeleted" = false AND ("createdAt" > $1 OR "updatedAt" > $1)
         `, lastSyncedAt)
@@ -860,14 +861,15 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 		var sessions []models.EventIndex
 		for rows.Next() {
 			var id int
-			var title, category string
-			err := rows.Scan(&id, &category, &title)
+			var title, category, url string
+			err := rows.Scan(&id, &category, &title, &url)
 			if err != nil {
 				return nil, err
 			}
 
 			session := models.EventIndex{
 				ID:       strconv.Itoa(id),
+				URl:      url,
 				Title:    title,
 				Category: category,
 			}
