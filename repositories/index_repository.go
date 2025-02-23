@@ -796,10 +796,10 @@ func readSessionTable(db *sql.DB, condition string) ([]models.SessionIndex, erro
 
 func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 	if condition == "all" {
-		// Fetch all sessions
+		// Fetch all events
 		rows, err := db.Query(`
             SELECT id, category, title, url
-            FROM public."Session"
+            FROM public."Event"
             WHERE "isDeleted" = false
         `)
 		if err != nil {
@@ -807,7 +807,7 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 		}
 		defer rows.Close()
 
-		var sessions []models.EventIndex
+		var events []models.EventIndex
 		for rows.Next() {
 			var id int
 			var title, category, url string
@@ -816,16 +816,16 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 				return nil, err
 			}
 
-			session := models.EventIndex{
+			event := models.EventIndex{
 				ID:       strconv.Itoa(id),
 				URl:      url,
 				Title:    title,
 				Category: category,
 			}
 
-			sessions = append(sessions, session)
+			events = append(events, event)
 		}
-		return sessions, nil
+		return events, nil
 	} else if condition == "new" {
 		// Fetch the lastSyncedAt value from SyncDb table
 		var lastSyncedAt time.Time
@@ -847,10 +847,10 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 			lastSyncedAt = time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)
 		}
 
-		// Fetch new sessions created or updated after lastSyncedAt
+		// Fetch new events created or updated after lastSyncedAt
 		rows, err := db.Query(`
             SELECT id, category, title, url
-            FROM public."Session"
+            FROM public."Event"
             WHERE "isDeleted" = false AND ("createdAt" > $1 OR "updatedAt" > $1)
         `, lastSyncedAt)
 		if err != nil {
@@ -858,7 +858,7 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 		}
 		defer rows.Close()
 
-		var sessions []models.EventIndex
+		var events []models.EventIndex
 		for rows.Next() {
 			var id int
 			var title, category, url string
@@ -867,17 +867,17 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 				return nil, err
 			}
 
-			session := models.EventIndex{
+			event := models.EventIndex{
 				ID:       strconv.Itoa(id),
 				URl:      url,
 				Title:    title,
 				Category: category,
 			}
 
-			sessions = append(sessions, session)
+			events = append(events, event)
 		}
 
-		return sessions, nil
+		return events, nil
 	}
 	return nil, nil
 }
