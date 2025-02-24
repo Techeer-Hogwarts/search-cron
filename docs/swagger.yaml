@@ -43,6 +43,9 @@ definitions:
       title:
         example: 세션 제목
         type: string
+      url:
+        example: https://example.com/event
+        type: string
     type: object
   models.ProjectIndex:
     properties:
@@ -79,6 +82,9 @@ definitions:
       id:
         example: "1"
         type: string
+      position:
+        example: BACKEND
+        type: string
       title:
         example: 이력서 제목
         type: string
@@ -94,6 +100,9 @@ definitions:
       userProfileImage:
         example: https://example.com/profile.jpg
         type: string
+      year:
+        example: 7
+        type: integer
     type: object
   models.SessionIndex:
     properties:

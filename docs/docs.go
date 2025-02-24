@@ -670,6 +670,10 @@ const docTemplate = `{
                 "title": {
                     "type": "string",
                     "example": "세션 제목"
+                },
+                "url": {
+                    "type": "string",
+                    "example": "https://example.com/event"
                 }
             }
         },
@@ -723,6 +727,10 @@ const docTemplate = `{
                     "type": "string",
                     "example": "1"
                 },
+                "position": {
+                    "type": "string",
+                    "example": "BACKEND"
+                },
                 "title": {
                     "type": "string",
                     "example": "이력서 제목"
@@ -742,6 +750,10 @@ const docTemplate = `{
                 "userProfileImage": {
                     "type": "string",
                     "example": "https://example.com/profile.jpg"
+                },
+                "year": {
+                    "type": "integer",
+                    "example": 7
                 }
             }
         },
