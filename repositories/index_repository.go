@@ -240,7 +240,7 @@ func readUserTable(db *sql.DB, condition string) ([]models.UserIndex, error) {
 				Name:         name,
 				School:       school,
 				Email:        email,
-				Year:         year,
+				Year:         strconv.Itoa(year),
 				Grade:        grade,
 				Stack:        stack,
 				ProfileImage: profileImage,
@@ -287,7 +287,7 @@ func readUserTable(db *sql.DB, condition string) ([]models.UserIndex, error) {
 				Name:         name,
 				School:       school,
 				Email:        email,
-				Year:         year,
+				Year:         strconv.Itoa(year),
 				Grade:        grade,
 				Stack:        stack,
 				ProfileImage: profileImage,
@@ -642,7 +642,7 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 				UserID:           strconv.Itoa(userId),
 				UserName:         userName,
 				UserProfileImage: userProfileImage,
-				Year:             year,
+				Year:             strconv.Itoa(year),
 				Position:         position,
 			}
 
@@ -690,7 +690,7 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 				UserID:           strconv.Itoa(userId),
 				UserName:         userName,
 				UserProfileImage: userProfileImage,
-				Year:             year,
+				Year:             strconv.Itoa(year),
 				Position:         position,
 			}
 
@@ -729,8 +729,8 @@ func readSessionTable(db *sql.DB, condition string) ([]models.SessionIndex, erro
 				Title:     title,
 				Presenter: presenter,
 				Date:      date,
-				LikeCount: likeCount,
-				ViewCount: viewCount,
+				LikeCount: strconv.Itoa(likeCount),
+				ViewCount: strconv.Itoa(viewCount),
 				Thumbnail: thumbnail,
 			}
 
@@ -784,8 +784,8 @@ func readSessionTable(db *sql.DB, condition string) ([]models.SessionIndex, erro
 				Title:     title,
 				Presenter: presenter,
 				Date:      date,
-				LikeCount: likeCount,
-				ViewCount: viewCount,
+				LikeCount: strconv.Itoa(likeCount),
+				ViewCount: strconv.Itoa(viewCount),
 				Thumbnail: thumbnail,
 			}
 

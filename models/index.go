@@ -10,7 +10,7 @@ type UserIndex struct {
 	Name         string   `json:"name" form:"name" example:"윤정은"`
 	School       string   `json:"school" form:"school" example:"서울대학교"`
 	Email        string   `json:"email" form:"email" example:"test@gmail.com"`
-	Year         int      `json:"year" form:"year" example:"7"`
+	Year         string   `json:"year" form:"year" example:"7"`
 	Grade        string   `json:"grade" form:"grade" example:"3"`
 	Stack        []string `json:"stack" form:"stack" example:"Go"`
 	ProfileImage string   `json:"profileImage" form:"profileImage" example:"https://example.com/profile.jpg"`
@@ -53,7 +53,7 @@ type ResumeIndex struct {
 	UserID           string `json:"userID" form:"userID" example:"1"`
 	UserName         string `json:"userName" form:"userName" example:"윤정은"`
 	UserProfileImage string `json:"userProfileImage" form:"userProfileImage" example:"https://example.com/profile.jpg"`
-	Year             int    `json:"year" form:"year" example:"7"`
+	Year             string `json:"year" form:"year" example:"7"`
 	Position         string `json:"position" form:"position" example:"BACKEND"`
 }
 
@@ -63,8 +63,8 @@ type SessionIndex struct {
 	Title     string `json:"title" form:"title" example:"세션 제목"`
 	Presenter string `json:"presenter" form:"presenter" example:"윤정은"`
 	Date      string `json:"date" form:"date" example:"2021-01-01"`
-	LikeCount int    `json:"likeCount" form:"likeCount" example:"10"`
-	ViewCount int    `json:"viewCount" form:"viewCount" example:"100"`
+	LikeCount string `json:"likeCount" form:"likeCount" example:"10"`
+	ViewCount string `json:"viewCount" form:"viewCount" example:"100"`
 }
 
 type EventIndex struct {

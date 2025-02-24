@@ -101,8 +101,8 @@ definitions:
         example: https://example.com/profile.jpg
         type: string
       year:
-        example: 7
-        type: integer
+        example: "7"
+        type: string
     type: object
   models.SessionIndex:
     properties:
@@ -113,8 +113,8 @@ definitions:
         example: "1"
         type: string
       likeCount:
-        example: 10
-        type: integer
+        example: "10"
+        type: string
       presenter:
         example: 윤정은
         type: string
@@ -125,8 +125,8 @@ definitions:
         example: 세션 제목
         type: string
       viewCount:
-        example: 100
-        type: integer
+        example: "100"
+        type: string
     type: object
   models.StudyIndex:
     properties:
@@ -176,8 +176,8 @@ definitions:
           type: string
         type: array
       year:
-        example: 7
-        type: integer
+        example: "7"
+        type: string
     type: object
 info:
   contact: {}
