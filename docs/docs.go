@@ -752,8 +752,8 @@ const docTemplate = `{
                     "example": "https://example.com/profile.jpg"
                 },
                 "year": {
-                    "type": "integer",
-                    "example": 7
+                    "type": "string",
+                    "example": "7"
                 }
             }
         },
@@ -769,8 +769,8 @@ const docTemplate = `{
                     "example": "1"
                 },
                 "likeCount": {
-                    "type": "integer",
-                    "example": 10
+                    "type": "string",
+                    "example": "10"
                 },
                 "presenter": {
                     "type": "string",
@@ -785,8 +785,8 @@ const docTemplate = `{
                     "example": "세션 제목"
                 },
                 "viewCount": {
-                    "type": "integer",
-                    "example": 100
+                    "type": "string",
+                    "example": "100"
                 }
             }
         },
@@ -857,8 +857,8 @@ const docTemplate = `{
                     ]
                 },
                 "year": {
-                    "type": "integer",
-                    "example": 7
+                    "type": "string",
+                    "example": "7"
                 }
             }
         }
