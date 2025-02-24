@@ -310,7 +310,7 @@ func readProjectTable(db *sql.DB, condition string) ([]models.ProjectIndex, erro
 				COALESCE(JSONB_AGG(DISTINCT s.name) FILTER (WHERE s.name IS NOT NULL), '[]') AS "teamStacks",
 				COALESCE(JSONB_AGG(r."imageUrl") FILTER (WHERE r."imageUrl" IS NOT NULL), '[]') AS "resultImages"
 			FROM public."ProjectTeam" p
-			LEFT JOIN public."ProjectResultImage" r 
+			LEFT JOIN public."ProjectMainImage" r 
 				ON p.id = r."projectTeamId" AND r."isDeleted" = false
 			LEFT JOIN public."TeamStack" ts 
 				ON p.id = ts."projectTeamId" AND ts."isDeleted" = false
@@ -377,7 +377,7 @@ func readProjectTable(db *sql.DB, condition string) ([]models.ProjectIndex, erro
 				COALESCE(JSONB_AGG(DISTINCT s.name) FILTER (WHERE s.name IS NOT NULL), '[]') AS "teamStacks",
 				COALESCE(JSONB_AGG(r."imageUrl") FILTER (WHERE r."imageUrl" IS NOT NULL), '[]') AS "resultImages"
 			FROM public."ProjectTeam" p
-			LEFT JOIN public."ProjectResultImage" r 
+			LEFT JOIN public."ProjectMainImage" r 
 				ON p.id = r."projectTeamId" AND r."isDeleted" = false
 			LEFT JOIN public."TeamStack" ts 
 				ON p.id = ts."projectTeamId" AND ts."isDeleted" = false
