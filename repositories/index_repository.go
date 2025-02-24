@@ -616,7 +616,7 @@ func readBlogTable(db *sql.DB, condition string) ([]models.BlogIndex, error) {
 func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error) {
 	if condition == "all" {
 		rows, err := db.Query(`
-			SELECT b.id, b.title, b.url, b."createdAt", b."userId", u.name, u."profileImage"
+			SELECT b.id, b.title, b.url, b."createdAt", b."userId", u.name, u."profileImage", u.year, b.position
 			FROM public."Resume" b
 			JOIN public."User" u ON b."userId" = u.id
 			WHERE b."isDeleted" = false
@@ -627,10 +627,10 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 		defer rows.Close()
 		var resumes []models.ResumeIndex
 		for rows.Next() {
-			var id, userId int
-			var title, url, userName, userProfileImage string
+			var id, userId, year int
+			var title, url, userName, userProfileImage, position string
 			var createdAt time.Time
-			err := rows.Scan(&id, &title, &url, &createdAt, &userId, &userName, &userProfileImage)
+			err := rows.Scan(&id, &title, &url, &createdAt, &userId, &userName, &userProfileImage, &year, &position)
 			if err != nil {
 				return nil, err
 			}
@@ -642,6 +642,8 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 				UserID:           strconv.Itoa(userId),
 				UserName:         userName,
 				UserProfileImage: userProfileImage,
+				Year:             year,
+				Position:         position,
 			}
 
 			resumes = append(resumes, resume)
@@ -662,7 +664,7 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 		log.Println("lastSyncedAt: ", lastSyncedAt)
 		// Fetch new users that are created/updated after lastSyncedAt
 		rows, err := db.Query(`
-			SELECT b.id, b.title, b.url, b."createdAt", b."userId", u.name, u."profileImage"
+			SELECT b.id, b.title, b.url, b."createdAt", b."userId", u.name, u."profileImage", u.year, b.position
 			FROM public."Resume" b
 			JOIN public."User" u ON b."userId" = u.id
 			WHERE (b."createdAt" > $1 OR b."updatedAt" > $1) AND b."isDeleted" = false
@@ -673,10 +675,10 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 		defer rows.Close()
 		var resumes []models.ResumeIndex
 		for rows.Next() {
-			var id, userId int
-			var title, url, userName, userProfileImage string
+			var id, userId, year int
+			var title, url, userName, userProfileImage, position string
 			var createdAt time.Time
-			err := rows.Scan(&id, &title, &url, &createdAt, &userId, &userName, &userProfileImage)
+			err := rows.Scan(&id, &title, &url, &createdAt, &userId, &userName, &userProfileImage, &year, &position)
 			if err != nil {
 				return nil, err
 			}
@@ -688,6 +690,8 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 				UserID:           strconv.Itoa(userId),
 				UserName:         userName,
 				UserProfileImage: userProfileImage,
+				Year:             year,
+				Position:         position,
 			}
 
 			resumes = append(resumes, resume)

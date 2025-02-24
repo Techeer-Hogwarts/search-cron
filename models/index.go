@@ -53,6 +53,8 @@ type ResumeIndex struct {
 	UserID           string `json:"userID" form:"userID" example:"1"`
 	UserName         string `json:"userName" form:"userName" example:"윤정은"`
 	UserProfileImage string `json:"userProfileImage" form:"userProfileImage" example:"https://example.com/profile.jpg"`
+	Year             int    `json:"year" form:"year" example:"7"`
+	Position         string `json:"position" form:"position" example:"BACKEND"`
 }
 
 type SessionIndex struct {
