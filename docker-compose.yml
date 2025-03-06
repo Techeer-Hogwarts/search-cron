@@ -148,14 +148,7 @@ services:
       - /sys:/host/sys:ro
       - /:/rootfs:ro
     networks:
-      - main-network
-    deploy:
-      mode: global
-      placement:
-        constraints:
-          - node.labels.archtype != arm
-    labels:
-      - prometheus-job=node-exporter
+      - search-network
 
 networks:
   search-network:
