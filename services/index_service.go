@@ -15,6 +15,7 @@ type IndexService interface {
 	CreateResumeIndex(post *models.ResumeIndex) (*meilisearch.TaskInfo, error)
 	CreateSessionIndex(post *models.SessionIndex) (*meilisearch.TaskInfo, error)
 	CreateEventIndex(post *models.EventIndex) (*meilisearch.TaskInfo, error)
+	CreateStackIndex() (*meilisearch.TaskInfo, error)
 	CreateAllIndex(condition string) (*meilisearch.TaskInfo, error)
 	DeleteIndexDocument(id, index string) (*meilisearch.TaskInfo, error)
 	DeleteIndex(index string) (*meilisearch.TaskInfo, error)
@@ -65,6 +66,10 @@ func (s *indexService) CreateSessionIndex(post *models.SessionIndex) (*meilisear
 
 func (s *indexService) CreateEventIndex(post *models.EventIndex) (*meilisearch.TaskInfo, error) {
 	return s.repo.CreateEventIndex(post)
+}
+
+func (s *indexService) CreateStackIndex() (*meilisearch.TaskInfo, error) {
+	return s.repo.CreateStackIndex()
 }
 
 func (s *indexService) CreateAllIndex(condition string) (*meilisearch.TaskInfo, error) {

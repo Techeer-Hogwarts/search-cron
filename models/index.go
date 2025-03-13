@@ -73,3 +73,9 @@ type EventIndex struct {
 	Category string `json:"category" form:"category" example:"세션"`
 	Title    string `json:"title" form:"title" example:"세션 제목"`
 }
+
+type StackIndex struct {
+	ID       string `json:"id" form:"id" example:"1"`
+	Name     string `json:"name" form:"name" example:"Go"`
+	Category string `json:"category" form:"category" example:"BACKEND"`
+}

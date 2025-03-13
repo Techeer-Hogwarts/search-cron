@@ -467,6 +467,32 @@ paths:
       summary: Creates index in meilisearch
       tags:
       - index
+  /index/stack:
+    post:
+      consumes:
+      - application/json
+      description: Add Stack Index to Meilisearch
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Creates index in meilisearch
+      tags:
+      - index
   /index/study:
     post:
       consumes:

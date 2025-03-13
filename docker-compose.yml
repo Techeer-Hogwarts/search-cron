@@ -32,7 +32,8 @@ services:
       - logging_jobname=searchContainer
 
   search-cron:
-    image: suhach0523/techeerism-search-cron:latest
+    build: 
+      context: .
     container_name: search-cron
     networks:
       - search-network

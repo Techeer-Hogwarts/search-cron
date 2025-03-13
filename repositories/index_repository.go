@@ -20,6 +20,7 @@ type IndexRepository interface {
 	CreateResumeIndex(post *models.ResumeIndex) (*meilisearch.TaskInfo, error)
 	CreateSessionIndex(post *models.SessionIndex) (*meilisearch.TaskInfo, error)
 	CreateEventIndex(post *models.EventIndex) (*meilisearch.TaskInfo, error)
+	CreateStackIndex() (*meilisearch.TaskInfo, error)
 	CreateAllIndex(condition string) (*meilisearch.TaskInfo, error)
 	DeleteIndexDocument(id, index string) (*meilisearch.TaskInfo, error)
 	DeleteIndex(index string) (*meilisearch.TaskInfo, error)
@@ -90,6 +91,21 @@ func (r *indexRepository) CreateEventIndex(post *models.EventIndex) (*meilisearc
 		return info, err
 	}
 	return info, nil
+}
+
+func (r *indexRepository) CreateStackIndex() (*meilisearch.TaskInfo, error) {
+	stackData, err := readStackTable(r.db)
+	if err != nil {
+		return nil, err
+	}
+	if len(stackData) != 0 {
+		info, err := (*r.meiliclient).Index("stack").AddDocuments(stackData, "id")
+		if err != nil {
+			return info, err
+		}
+		return info, nil
+	}
+	return nil, nil
 }
 
 // create all index should retrieve all data from database and create index in meilisearch
@@ -884,6 +900,38 @@ func readEventTable(db *sql.DB, condition string) ([]models.EventIndex, error) {
 		return events, nil
 	}
 	return nil, nil
+}
+
+func readStackTable(db *sql.DB) ([]models.StackIndex, error) {
+	rows, err := db.Query(`
+		SELECT id, name, category
+		FROM public."Stack"
+		WHERE "isDeleted" = false
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var stacks []models.StackIndex
+	for rows.Next() {
+		var id int
+		var name, category string
+		err := rows.Scan(&id, &name, &category)
+		if err != nil {
+			return nil, err
+		}
+
+		stack := models.StackIndex{
+			ID:       strconv.Itoa(id),
+			Name:     name,
+			Category: category,
+		}
+
+		stacks = append(stacks, stack)
+	}
+
+	return stacks, nil
 }
 
 func updateLastSyncedAt(db *sql.DB) error {
