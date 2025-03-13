@@ -44,7 +44,7 @@ func (h *IndexHandler) CreateUserIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("User Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 
@@ -74,7 +74,7 @@ func (h *IndexHandler) CreateProjectIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("Project Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 
@@ -104,7 +104,7 @@ func (h *IndexHandler) CreateStudyIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("Study Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 
@@ -134,7 +134,7 @@ func (h *IndexHandler) CreateBlogIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("Blog Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 
@@ -164,7 +164,7 @@ func (h *IndexHandler) CreateResumeIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("Resume Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 
@@ -194,7 +194,7 @@ func (h *IndexHandler) CreateSessionIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("Session Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 
@@ -224,7 +224,28 @@ func (h *IndexHandler) CreateEventIndexHandler(c *gin.Context) {
 		return
 	}
 	jsonData, _ := json.MarshalIndent(info, "", "  ")
-	log.Printf("Index created successfully: %v", string(jsonData))
+	log.Printf("Event Index created successfully: %v", string(jsonData))
+	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
+}
+
+// CreateStackIndexHandler creates stack index in meilisearch from request
+// @Summary Creates index in meilisearch
+// @Description Add Stack Index to Meilisearch
+// @Tags index
+// @Accept json
+// @Produce json
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Router /index/stack [post]
+func (h *IndexHandler) CreateStackIndexHandler(c *gin.Context) {
+	info, err := h.service.CreateStackIndex()
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	jsonData, _ := json.MarshalIndent(info, "", "  ")
+	log.Printf("Stack Index created successfully: %v", string(jsonData))
 	c.JSON(200, gin.H{"message": "Index created successfully", "info": info})
 }
 

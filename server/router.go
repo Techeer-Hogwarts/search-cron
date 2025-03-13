@@ -48,6 +48,7 @@ func setupRouter(handler *handlers.Handler) *gin.Engine {
 			indexGroup.POST("/resume", handler.IndexHandler.CreateResumeIndexHandler)
 			indexGroup.POST("/session", handler.IndexHandler.CreateSessionIndexHandler)
 			indexGroup.POST("/event", handler.IndexHandler.CreateEventIndexHandler)
+			indexGroup.POST("/stack", handler.IndexHandler.CreateStackIndexHandler)
 		}
 		syncGroup := apiGroup.Group("/sync")
 		{
