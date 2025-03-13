@@ -12,7 +12,7 @@ services:
       - logging_jobname=watchtower
   
   search-conatiner:
-    image: suhach0523/techeerism-search:latest
+    image: search-arm
     container_name: search-container
     networks:
       - search-network
