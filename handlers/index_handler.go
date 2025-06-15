@@ -8,6 +8,7 @@ import (
 	"github.com/Techeer-Hogwarts/search-cron/models"
 	"github.com/Techeer-Hogwarts/search-cron/services"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 type IndexHandler struct {
@@ -29,7 +30,7 @@ func NewIndexHandler(service services.IndexService) *IndexHandler {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/user [post]
-func (h *IndexHandler) CreateUserIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateUserIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var userIndex models.UserIndex
 
@@ -59,7 +60,7 @@ func (h *IndexHandler) CreateUserIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/project [post]
-func (h *IndexHandler) CreateProjectIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateProjectIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var projectIndex models.ProjectIndex
 
@@ -89,7 +90,7 @@ func (h *IndexHandler) CreateProjectIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/study [post]
-func (h *IndexHandler) CreateStudyIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateStudyIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var studyIndex models.StudyIndex
 
@@ -119,7 +120,7 @@ func (h *IndexHandler) CreateStudyIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/blog [post]
-func (h *IndexHandler) CreateBlogIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateBlogIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var blogIndex models.BlogIndex
 
@@ -149,7 +150,7 @@ func (h *IndexHandler) CreateBlogIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/resume [post]
-func (h *IndexHandler) CreateResumeIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateResumeIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var resumeIndex models.ResumeIndex
 
@@ -179,7 +180,7 @@ func (h *IndexHandler) CreateResumeIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/session [post]
-func (h *IndexHandler) CreateSessionIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateSessionIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var sessionIndex models.SessionIndex
 
@@ -209,7 +210,7 @@ func (h *IndexHandler) CreateSessionIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/event [post]
-func (h *IndexHandler) CreateEventIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateEventIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	// Create index in meilisearch
 	var eventIndex models.EventIndex
 
@@ -238,7 +239,7 @@ func (h *IndexHandler) CreateEventIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /index/stack [post]
-func (h *IndexHandler) CreateStackIndexHandler(c *gin.Context) {
+func (h *IndexHandler) CreateStackIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	info, err := h.service.CreateStackIndex()
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
@@ -364,7 +365,7 @@ func (h *IndexHandler) DeleteAllDocumentHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /sync/all [post]
-func (h *IndexHandler) SyncAllIndexHandler(c *gin.Context) {
+func (h *IndexHandler) SyncAllIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	info, err := h.service.CreateAllIndex("all")
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
@@ -385,7 +386,7 @@ func (h *IndexHandler) SyncAllIndexHandler(c *gin.Context) {
 // @Failure 400 {object} map[string]interface{}
 // @Failure 500 {object} map[string]interface{}
 // @Router /sync/new [post]
-func (h *IndexHandler) SyncNewIndexHandler(c *gin.Context) {
+func (h *IndexHandler) SyncNewIndexHandler(c *gin.Context, counter *prometheus.CounterVec, durationHistogram *prometheus.HistogramVec) {
 	info, err := h.service.CreateAllIndex("new")
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})

@@ -44,67 +44,45 @@ func setupRouter(handler *handlers.Handler) *gin.Engine {
 		indexGroup := apiGroup.Group("/index")
 		{
 			indexGroup.POST("/user", func(c *gin.Context) {
-				handler.IndexHandler.CreateUserIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "user").Inc()
+				handler.IndexHandler.CreateUserIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/project", func(c *gin.Context) {
-				handler.IndexHandler.CreateProjectIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "project").Inc()
+				handler.IndexHandler.CreateProjectIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/study", func(c *gin.Context) {
-				handler.IndexHandler.CreateStudyIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "study").Inc()
+				handler.IndexHandler.CreateStudyIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/blog", func(c *gin.Context) {
-				handler.IndexHandler.CreateBlogIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "blog").Inc()
+				handler.IndexHandler.CreateBlogIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/resume", func(c *gin.Context) {
-				handler.IndexHandler.CreateResumeIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "resume").Inc()
+				handler.IndexHandler.CreateResumeIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/session", func(c *gin.Context) {
-				handler.IndexHandler.CreateSessionIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "session").Inc()
+				handler.IndexHandler.CreateSessionIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/event", func(c *gin.Context) {
-				handler.IndexHandler.CreateEventIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "event").Inc()
+				handler.IndexHandler.CreateEventIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			indexGroup.POST("/stack", func(c *gin.Context) {
-				handler.IndexHandler.CreateStackIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "stack").Inc()
+				handler.IndexHandler.CreateStackIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 		}
 		syncGroup := apiGroup.Group("/sync")
 		{
 			syncGroup.POST("/all", func(c *gin.Context) {
-				handler.IndexHandler.SyncAllIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "all").Inc()
+				handler.IndexHandler.SyncAllIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 			syncGroup.POST("/new", func(c *gin.Context) {
-				handler.IndexHandler.SyncNewIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "new").Inc()
+				handler.IndexHandler.SyncNewIndexHandler(c, indexCreationCounter, indexCreationDurationHistogram)
 			})
 		}
 		deleteGroup := apiGroup.Group("/delete")
 		{
-			deleteGroup.DELETE("/index", func(c *gin.Context) {
-				handler.IndexHandler.DeleteIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "delete").Inc()
-			})
-			deleteGroup.DELETE("/index/all", func(c *gin.Context) {
-				handler.IndexHandler.DeleteAllIndexHandler(c)
-				indexCreationCounter.WithLabelValues("success", "delete").Inc()
-			})
-			deleteGroup.DELETE("/document", func(c *gin.Context) {
-				handler.IndexHandler.DeleteDocumentHandler(c)
-				indexCreationCounter.WithLabelValues("success", "delete").Inc()
-			})
-			deleteGroup.DELETE("/document/all", func(c *gin.Context) {
-				handler.IndexHandler.DeleteAllDocumentHandler(c)
-				indexCreationCounter.WithLabelValues("success", "delete").Inc()
-			})
+			deleteGroup.DELETE("/index", handler.IndexHandler.DeleteIndexHandler)
+			deleteGroup.DELETE("/index/all", handler.IndexHandler.DeleteAllIndexHandler)
+			deleteGroup.DELETE("/document", handler.IndexHandler.DeleteDocumentHandler)
+			deleteGroup.DELETE("/document/all", handler.IndexHandler.DeleteAllDocumentHandler)
 		}
 	}
 	swagger := apiGroup.Group("/swagger")
