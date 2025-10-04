@@ -365,8 +365,8 @@ func readProjectTable(db *sql.DB, condition string) ([]models.ProjectIndex, erro
 				Name:           name,
 				Title:          name, // Assuming Title is the same as Name
 				ProjectExplain: projectExplain,
-				ResultImages:   resultImages, // Now it's just an array of image URLs
-				TeamStacks:     teamStacks,
+				// ResultImages:   resultImages, // Now it's just an array of image URLs
+				// TeamStacks:     teamStacks,
 			}
 
 			projects = append(projects, project)
@@ -431,8 +431,8 @@ func readProjectTable(db *sql.DB, condition string) ([]models.ProjectIndex, erro
 				Name:           name,
 				Title:          name, // Assuming Title is the same as Name
 				ProjectExplain: projectExplain,
-				ResultImages:   resultImages, // Now it's just an array of image URLs
-				TeamStacks:     teamStacks,
+				// ResultImages:   resultImages, // Now it's just an array of image URLs
+				// TeamStacks:     teamStacks,
 			}
 
 			projects = append(projects, project)
@@ -478,7 +478,7 @@ func readStudyTable(db *sql.DB, condition string) ([]models.StudyIndex, error) {
 				Name:         name,
 				Title:        name,
 				StudyExplain: studyExplain,
-				ResultImages: resultImages,
+				// ResultImages: resultImages,
 			}
 
 			studies = append(studies, study)
@@ -532,7 +532,7 @@ func readStudyTable(db *sql.DB, condition string) ([]models.StudyIndex, error) {
 				Name:         name,
 				Title:        name,
 				StudyExplain: studyExplain,
-				ResultImages: resultImages,
+				// ResultImages: resultImages,
 			}
 			studies = append(studies, study)
 		}
@@ -632,7 +632,7 @@ func readBlogTable(db *sql.DB, condition string) ([]models.BlogIndex, error) {
 func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error) {
 	if condition == "all" {
 		rows, err := db.Query(`
-			SELECT b.id, b.title, b.url, b."createdAt", b."userId", u.name, u."profileImage", u.year, b.position
+			SELECT b.id, b.title, b."createdAt", b."userId", u.name, u."profileImage", u.year, b.position
 			FROM public."Resume" b
 			JOIN public."User" u ON b."userId" = u.id
 			WHERE b."isDeleted" = false
@@ -644,16 +644,15 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 		var resumes []models.ResumeIndex
 		for rows.Next() {
 			var id, userId, year int
-			var title, url, userName, userProfileImage, position string
+			var title, userName, userProfileImage, position string
 			var createdAt time.Time
-			err := rows.Scan(&id, &title, &url, &createdAt, &userId, &userName, &userProfileImage, &year, &position)
+			err := rows.Scan(&id, &title, &createdAt, &userId, &userName, &userProfileImage, &year, &position)
 			if err != nil {
 				return nil, err
 			}
 			resume := models.ResumeIndex{
 				ID:               strconv.Itoa(id),
 				Title:            title,
-				URL:              url,
 				CreatedAt:        createdAt.Format(time.RFC3339),
 				UserID:           strconv.Itoa(userId),
 				UserName:         userName,
@@ -680,7 +679,7 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 		log.Println("lastSyncedAt: ", lastSyncedAt)
 		// Fetch new users that are created/updated after lastSyncedAt
 		rows, err := db.Query(`
-			SELECT b.id, b.title, b.url, b."createdAt", b."userId", u.name, u."profileImage", u.year, b.position
+			SELECT b.id, b.title, b."createdAt", b."userId", u.name, u."profileImage", u.year, b.position
 			FROM public."Resume" b
 			JOIN public."User" u ON b."userId" = u.id
 			WHERE (b."createdAt" > $1 OR b."updatedAt" > $1) AND b."isDeleted" = false
@@ -692,16 +691,15 @@ func readResumeTable(db *sql.DB, condition string) ([]models.ResumeIndex, error)
 		var resumes []models.ResumeIndex
 		for rows.Next() {
 			var id, userId, year int
-			var title, url, userName, userProfileImage, position string
+			var title, userName, userProfileImage, position string
 			var createdAt time.Time
-			err := rows.Scan(&id, &title, &url, &createdAt, &userId, &userName, &userProfileImage, &year, &position)
+			err := rows.Scan(&id, &title, &createdAt, &userId, &userName, &userProfileImage, &year, &position)
 			if err != nil {
 				return nil, err
 			}
 			resume := models.ResumeIndex{
 				ID:               strconv.Itoa(id),
 				Title:            title,
-				URL:              url,
 				CreatedAt:        createdAt.Format(time.RFC3339),
 				UserID:           strconv.Itoa(userId),
 				UserName:         userName,
@@ -746,7 +744,6 @@ func readSessionTable(db *sql.DB, condition string) ([]models.SessionIndex, erro
 				Presenter: presenter,
 				Date:      date,
 				LikeCount: strconv.Itoa(likeCount),
-				ViewCount: strconv.Itoa(viewCount),
 				Thumbnail: thumbnail,
 			}
 
@@ -801,7 +798,7 @@ func readSessionTable(db *sql.DB, condition string) ([]models.SessionIndex, erro
 				Presenter: presenter,
 				Date:      date,
 				LikeCount: strconv.Itoa(likeCount),
-				ViewCount: strconv.Itoa(viewCount),
+				// ViewCount: strconv.Itoa(viewCount),
 				Thumbnail: thumbnail,
 			}
 
